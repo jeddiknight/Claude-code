@@ -60,11 +60,10 @@ export default function ResultsPage() {
 
   return (
     <main className="min-h-screen bg-gray-50 print:bg-white">
-      {/* Header */}
       <header className="bg-white border-b border-gray-100 sticky top-0 z-40 print:hidden">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-3">
-            <Link href="/" className="text-gray-400 hover:text-gray-600 transition-colors">
+            <Link href="/" className="text-gray-400 hover:text-gray-600 transition-colors touch-manipulation py-1">
               ← Atgal
             </Link>
             <div className="h-5 w-px bg-gray-200" />
@@ -76,13 +75,13 @@ export default function ResultsPage() {
           <div className="flex items-center gap-2">
             <button
               onClick={downloadKML}
-              className="flex items-center gap-1.5 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2.5 bg-green-600 active:bg-green-800 text-white text-sm font-medium rounded-lg transition-colors touch-manipulation min-h-[42px]"
             >
               🗺️ KML
             </button>
             <button
               onClick={printPlan}
-              className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 active:bg-blue-800 text-white text-sm font-medium rounded-lg transition-colors touch-manipulation min-h-[42px]"
             >
               🖨️ PDF
             </button>
@@ -92,23 +91,21 @@ export default function ResultsPage() {
 
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
-          {/* Main content */}
           <div>
-            {/* Plan header */}
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white mb-6 print:bg-blue-600 print:p-6">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-6 sm:p-8 text-white mb-6">
               <div className="flex items-start justify-between flex-wrap gap-4">
                 <div>
-                  <h1 className="text-3xl font-extrabold mb-2">{plan.title}</h1>
+                  <h1 className="text-2xl sm:text-3xl font-extrabold mb-2">{plan.title}</h1>
                   <p className="text-blue-100 leading-relaxed max-w-xl">{plan.summary}</p>
                   {plan.meta && (
-                    <div className="flex flex-wrap gap-3 mt-4">
+                    <div className="flex flex-wrap gap-2 mt-4">
                       {[
                         { icon: "📍", label: plan.meta.destination },
                         { icon: "📅", label: `${plan.meta.duration} dienos` },
                         { icon: "🎯", label: plan.meta.style },
                         { icon: "💶", label: plan.meta.budget },
                       ].map((tag) => (
-                        <span key={tag.label} className="flex items-center gap-1 bg-white/20 text-white text-sm px-3 py-1 rounded-full">
+                        <span key={tag.label} className="flex items-center gap-1 bg-white/20 text-white text-xs sm:text-sm px-2.5 py-1 rounded-full">
                           <span>{tag.icon}</span> {tag.label}
                         </span>
                       ))}
@@ -125,16 +122,15 @@ export default function ResultsPage() {
               </div>
             </div>
 
-            {/* Tabs */}
             <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-6 print:hidden">
               {(["itinerary", "budget", "info"] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all ${
+                  className={`flex-1 py-2.5 px-2 sm:px-4 rounded-lg text-xs sm:text-sm font-semibold transition-all touch-manipulation ${
                     activeTab === tab
                       ? "bg-white text-blue-700 shadow-sm"
-                      : "text-gray-500 hover:text-gray-700"
+                      : "text-gray-500"
                   }`}
                 >
                   {tab === "itinerary" && "📅 Dienoraštis"}
@@ -144,7 +140,6 @@ export default function ResultsPage() {
               ))}
             </div>
 
-            {/* Itinerary tab */}
             {(activeTab === "itinerary" || typeof window === "undefined") && (
               <div className="space-y-4">
                 {plan.days.map((day, i) => (
@@ -153,12 +148,10 @@ export default function ResultsPage() {
               </div>
             )}
 
-            {/* Budget tab */}
             {activeTab === "budget" && (
               <BudgetTable budget={plan.budget_estimate} />
             )}
 
-            {/* Info tab */}
             {activeTab === "info" && (
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
                 <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
@@ -185,7 +178,6 @@ export default function ResultsPage() {
             )}
           </div>
 
-          {/* Sidebar */}
           <aside className="mt-8 lg:mt-0 print:hidden">
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm sticky top-24">
               <div className="px-5 py-4 border-b border-gray-100">
@@ -200,10 +192,10 @@ export default function ResultsPage() {
                     <button
                       key={i}
                       onClick={() => loadSavedPlan(saved)}
-                      className={`w-full text-left p-3 rounded-xl border-2 transition-all hover:border-blue-300 ${
+                      className={`w-full text-left p-3 rounded-xl border-2 transition-all touch-manipulation ${
                         saved.title === plan.title
                           ? "border-blue-500 bg-blue-50"
-                          : "border-gray-100 hover:bg-gray-50"
+                          : "border-gray-100 active:bg-gray-50"
                       }`}
                     >
                       <div className="font-medium text-gray-900 text-sm truncate">{saved.title}</div>
@@ -219,7 +211,7 @@ export default function ResultsPage() {
               <div className="px-4 pb-4 pt-2">
                 <Link
                   href="/"
-                  className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-xl text-sm transition-colors"
+                  className="w-full flex items-center justify-center gap-2 bg-blue-600 active:bg-blue-800 text-white font-medium py-3 rounded-xl text-sm transition-colors touch-manipulation"
                 >
                   + Naujas planas
                 </Link>
@@ -229,7 +221,6 @@ export default function ResultsPage() {
         </div>
       </div>
 
-      {/* Print styles */}
       <style jsx global>{`
         @media print {
           header, aside, .print\\:hidden { display: none !important; }

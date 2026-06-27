@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-      {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-gray-100 sticky top-0 z-40">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -20,7 +19,6 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Hero */}
       <div className="max-w-5xl mx-auto px-4 pt-12 pb-6 text-center">
         <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
           <span>🤖</span> Powered by Claude AI
@@ -36,13 +34,11 @@ export default function HomePage() {
         </p>
       </div>
 
-      {/* Form card */}
       <div className="max-w-2xl mx-auto px-4 pb-16">
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
+        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-5 sm:p-8">
           <TripForm />
         </div>
 
-        {/* Features */}
         <div className="grid grid-cols-3 gap-4 mt-8 text-center">
           {[
             { icon: "🗺️", title: "KML failas", desc: "Eksportuok į Google Maps" },

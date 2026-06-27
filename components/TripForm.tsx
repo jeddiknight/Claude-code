@@ -108,20 +108,20 @@ export default function TripForm() {
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             🎯 Kelionės stilius
           </label>
-          <div className="grid grid-cols-5 gap-2">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
             {STYLES.map((s) => (
               <button
                 key={s}
                 type="button"
                 onClick={() => setForm({ ...form, style: s })}
-                className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-all text-sm ${
+                className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 transition-all text-sm touch-manipulation ${
                   form.style === s
                     ? "border-blue-500 bg-blue-50 text-blue-700"
-                    : "border-gray-200 hover:border-gray-300 text-gray-600"
+                    : "border-gray-200 active:border-gray-400 text-gray-600"
                 }`}
               >
-                <span className="text-xl">{styleIcons[s]}</span>
-                <span className="font-medium text-xs">{s}</span>
+                <span className="text-2xl">{styleIcons[s]}</span>
+                <span className="font-medium text-xs leading-tight text-center">{s}</span>
               </button>
             ))}
           </div>
@@ -182,7 +182,7 @@ export default function TripForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl active:scale-[0.99] text-lg"
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-700 active:from-blue-800 active:to-blue-900 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg text-lg touch-manipulation min-h-[56px]"
         >
           {loading ? "Generuojama..." : "✨ Generuoti planą"}
         </button>

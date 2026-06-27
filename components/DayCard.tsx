@@ -38,9 +38,26 @@ export default function DayCard({ day, dayIndex }: DayCardProps) {
           `• ${l.name} (${l.type})\n  ${l.description}\n  Trukmė: ${l.duration} | Kaina: ${l.cost}`
       )
       .join("\n\n")}\n\nPatarimai: ${day.tips}`;
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const el = document.createElement("textarea");
+        el.value = text;
+        el.style.position = "fixed";
+        el.style.opacity = "0";
+        document.body.appendChild(el);
+        el.focus();
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   return (
@@ -59,13 +76,13 @@ export default function DayCard({ day, dayIndex }: DayCardProps) {
           <div className="flex items-center gap-2">
             <button
               onClick={copyDay}
-              className="bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5"
+              className="bg-white/20 active:bg-white/40 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 touch-manipulation min-h-[40px]"
             >
               {copied ? "✓ Nukopijuota" : "📋 Kopijuoti"}
             </button>
             <button
               onClick={() => setExpanded(!expanded)}
-              className="bg-white/20 hover:bg-white/30 text-white w-8 h-8 rounded-lg flex items-center justify-center transition-colors"
+              className="bg-white/20 active:bg-white/40 text-white w-10 h-10 rounded-lg flex items-center justify-center transition-colors touch-manipulation text-lg"
             >
               {expanded ? "−" : "+"}
             </button>
