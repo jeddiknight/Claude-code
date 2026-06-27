@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import { TripFormData } from "@/lib/types";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY ?? "");
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY ?? "" });
 
 export async function POST(req: NextRequest) {
   try {
@@ -66,9 +66,12 @@ Svarbu:
 - type laukas turi būti vienas iš: attraction, restaurant, hotel, activity
 - Grąžink tik JSON, be jokio papildomo teksto`;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-    const result = await model.generateContent(prompt);
-    let json = result.response.text().trim();
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: prompt,
+    });
+
+    let json = (response.text ?? "").trim();
     json = json.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
 
     return NextResponse.json(JSON.parse(json));
