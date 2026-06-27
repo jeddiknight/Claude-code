@@ -60,7 +60,7 @@ export default function HomePage() {
 
       {/* Version footer */}
       <div className="text-center pb-6 text-gray-400 text-xs">
-        v1.4 &middot; @google/genai SDK &middot; gemini-2.0-flash
+        v1.5 &middot; gemini-2.0-flash-lite
       </div>
     </main>
   );
