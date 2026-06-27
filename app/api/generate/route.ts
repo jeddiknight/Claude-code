@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenAI } from "@google/genai";
+import Groq from "groq-sdk";
 import { TripFormData } from "@/lib/types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY ?? "" });
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function POST(req: NextRequest) {
   try {
@@ -66,14 +66,15 @@ Svarbu:
 - type laukas turi būti vienas iš: attraction, restaurant, hotel, activity
 - Grąžink tik JSON, be jokio papildomo teksto`;
 
-    const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash-lite",
-      contents: prompt,
+    const completion = await groq.chat.completions.create({
+      messages: [{ role: "user", content: prompt }],
+      model: "llama-3.3-70b-versatile",
+      temperature: 0.7,
+      max_tokens: 4096,
+      response_format: { type: "json_object" },
     });
 
-    let json = (response.text ?? "").trim();
-    json = json.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
-
+    const json = completion.choices[0]?.message?.content ?? "{}";
     return NextResponse.json(JSON.parse(json));
   } catch (err) {
     console.error("Generate error:", err);

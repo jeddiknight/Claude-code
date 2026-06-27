@@ -23,7 +23,7 @@ export default function HomePage() {
       {/* Hero */}
       <div className="max-w-5xl mx-auto px-4 pt-12 pb-6 text-center">
         <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-          <span>🤖</span> Powered by Gemini AI
+          <span>🤖</span> Powered by Groq AI
         </div>
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
           Sugeneruok savo{" "}
@@ -60,7 +60,7 @@ export default function HomePage() {
 
       {/* Version footer */}
       <div className="text-center pb-6 text-gray-400 text-xs">
-        v1.5 &middot; gemini-2.0-flash-lite
+        v1.6 &middot; Groq &middot; llama-3.3-70b
       </div>
     </main>
   );
