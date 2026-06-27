@@ -66,7 +66,7 @@ Svarbu:
 - type laukas turi būti vienas iš: attraction, restaurant, hotel, activity
 - Grąžink tik JSON, be jokio papildomo teksto`;
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     const result = await model.generateContent(prompt);
     let json = result.response.text().trim();
     json = json.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
