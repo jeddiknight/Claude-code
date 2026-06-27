@@ -19,6 +19,11 @@ export interface Location {
   duration: string;
   cost: string;
   type: LocationType;
+  opening_hours?: string;
+  must_see?: string[];
+  booking_tip?: string;
+  distance_from_prev_km?: number;
+  travel_time_from_prev?: string;
 }
 
 export interface Day {
@@ -26,6 +31,7 @@ export interface Day {
   title: string;
   locations: Location[];
   tips: string;
+  daily_distance_km?: number;
 }
 
 export interface BudgetBreakdown {
@@ -40,6 +46,8 @@ export interface BudgetEstimate {
   total_min: number;
   total_max: number;
   currency: string;
+  per_person_per_day_min?: number;
+  per_person_per_day_max?: number;
   breakdown: BudgetBreakdown;
 }
 

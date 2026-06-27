@@ -28,11 +28,11 @@ export default function HomePage() {
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
           Sugeneruok savo{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-            tobułą kelionę
+            tobulą kelionę
           </span>
         </h1>
         <p className="text-gray-500 text-lg max-w-xl mx-auto">
-          Įveskite destinaciją ir gaukite išsamų kelionės planą su vietomis, biudžetu ir patarimais — per kelias sekundes.
+          Įveskite destinaciją ir gaukite išsamų kelionės planą su Google Maps nuorodomis, atstumais ir biudžetu — per kelias sekundes.
         </p>
       </div>
 
@@ -45,9 +45,9 @@ export default function HomePage() {
         {/* Features */}
         <div className="grid grid-cols-3 gap-4 mt-8 text-center">
           {[
-            { icon: "🗺️", title: "KML failas", desc: "Eksportuok į Google Maps" },
-            { icon: "💾", title: "Išsaugoma", desc: "Paskutiniai 3 planai" },
-            { icon: "🖨️", title: "Spausdinama", desc: "PDF formatas" },
+            { icon: "📍", title: "Google Maps", desc: "Nuorodos kiekvienai vietai" },
+            { icon: "🧭", title: "Atstumai", desc: "Kelionės laikas tarp vietų" },
+            { icon: "💶", title: "Biudžetas", desc: "Realios kainos ir skaičiavimai" },
           ].map((f) => (
             <div key={f.title} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
               <div className="text-2xl mb-2">{f.icon}</div>
@@ -60,7 +60,7 @@ export default function HomePage() {
 
       {/* Version footer */}
       <div className="text-center pb-6 text-gray-400 text-xs">
-        v1.6 &middot; Groq &middot; llama-3.3-70b
+        v2.0 · Groq · llama-3.3-70b · Google Maps
       </div>
     </main>
   );
